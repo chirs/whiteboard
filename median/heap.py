@@ -6,7 +6,7 @@ import operator
 
 class Heap(object):
     """
-    A Heap (by default, a min heap?)
+    A Heap (by default, a min heap)
     """
     
     def __init__(self, key=operator.lt):
@@ -29,7 +29,6 @@ class Heap(object):
 
     @staticmethod
     def _get_parent_index(index):
-        # huh?
         return (index) // 2
     
     @staticmethod
@@ -49,11 +48,13 @@ class Heap(object):
         return self._heap[1]
         
     def pop(self):
-        value = self._heap[1] # this throws an index error.
+        value = self._heap[1]
         try:
-            self._heap[1] = self._heap.pop()
+            self._heap[1] = self._heap.pop() 
         except IndexError:
-            pass # hm...
+            # Special case for popping off the last element.
+            # Don't swap down if the heap is empty.
+            pass
         else:
             self._swap_down(1)
         self._length -= 1
@@ -101,8 +102,7 @@ class Heap(object):
         return self._heap[1:].__str__()
     
     def __repr__(self):
-        return self._heap.__str__() # Should str and repr be different like this?
-
+        return self._heap.__str__()
 
 
 def main():
